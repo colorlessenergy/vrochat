@@ -1,7 +1,8 @@
 <template>
   <v-layout column>
     <v-flex xs6 offset-xs3>
-    <panel title="register">
+    <panel title="login">
+      <div class="pl-4 pr-4 pt-2 pb-2">
         <v-text-field
           v-model="username"
           label="username">
@@ -17,10 +18,11 @@
         <br>
         <v-btn 
           class="cyan"
-          @click="register"
-          dark>Register
+          @click="login"
+          dark>login
         </v-btn>
-      </panel>
+      </div>
+     </panel>
     </v-flex>
   </v-layout>
 </template>
@@ -36,9 +38,9 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async login () {
       try {
-        await AuthenticationService.register({
+        await AuthenticationService.login({
           username: this.username,
           password: this.password
         })
