@@ -14,6 +14,7 @@
 
     <v-toolbar-items>
       <router-link
+        v-if="!$store.state.isUserLoggedIn"
         dark
         flat 
         class="cyan"
@@ -24,6 +25,7 @@
         Login
       </router-link>
       <router-link 
+        v-if="!$store.state.isUserLoggedIn"
         class="cyan"
         tag="v-btn"
         :to="{

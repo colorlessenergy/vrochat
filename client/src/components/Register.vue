@@ -2,6 +2,7 @@
   <v-layout column>
     <v-flex xs6 offset-xs3>
     <panel title="register">
+      <form>
         <v-text-field
           v-model="username"
           label="username">
@@ -9,6 +10,7 @@
         <br>
         <v-text-field
           v-model="password"
+          autocomplete="new-password"
           label="password"
           type="password">
         ></v-text-field>
@@ -20,6 +22,7 @@
           @click="register"
           dark>Register
         </v-btn>
+      </form>
       </panel>
     </v-flex>
   </v-layout>
@@ -38,10 +41,12 @@ export default {
   methods: {
     async register () {
       try {
-        await AuthenticationService.register({
+        const response = await AuthenticationService.register({
           username: this.username,
           password: this.password
         })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
       } catch (error) {
         this.error = error.response.data.error
       }
