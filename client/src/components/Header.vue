@@ -10,9 +10,22 @@
         VroChat
       </router-link>
     </v-toolbar-title>
+    <v-toolbar-items>
+      <router-link
+        flat 
+        dark
+        class="cyan"
+        tag="v-btn"
+        :to="{
+          name: 'chat'
+        }">
+        Chat
+      </router-link>
+    </v-toolbar-items>
     <v-spacer></v-spacer>
 
     <v-toolbar-items>
+
       <router-link
         v-if="!$store.state.isUserLoggedIn"
         dark
@@ -24,6 +37,7 @@
         }">
         Login
       </router-link>
+
       <router-link 
         v-if="!$store.state.isUserLoggedIn"
         class="cyan"
@@ -33,6 +47,13 @@
         }">
         Sign Up
       </router-link>
+
+      <v-btn 
+        v-if="$store.state.isUserLoggedIn"
+        class="cyan"
+        @click="logout">
+        Log Out
+      </v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -40,7 +61,16 @@
 <script>
 
 export default {
+  methods: {
+    logout () {
+      this.$store.dispatch('setToken', null)
+      this.$store.dispatch('setUser', null)
 
+      this.$router.push({
+        name: 'root'
+      })
+    }
+  }
 }
 </script>
 

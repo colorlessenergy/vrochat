@@ -3,7 +3,6 @@
     <v-toolbar flat dense class="cyan" dark>
       <v-toolbar-title>{{ title }} </v-toolbar-title>
 
-      <slot name="action" />
       
     </v-toolbar>
 
